@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--文本输入框-->
+<label for="input"></label><input type="text" id="input">
+<br>
+<!--通过点击click按钮，弹窗中显示文本框内用户输入的内容-->
+<button onclick="start()">s</button>
+<script>
+    function start() {
+        var aa = document.getElementById("input").value;  //通过document.getElementById(“id名”).value来获取value值。
+        alert(aa);
+    }
+</script>
+
+</body>
+</html>

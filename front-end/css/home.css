@@ -1,0 +1,237 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    display: flex;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+/* Left Sidebar */
+/* 用户信息框 */
+.user-box {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #3f4851;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+/* 头像 */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #6ab0ff;
+    /* 默认背景色，可替换成用户头像图片 */
+    margin-right: 10px;
+    background-image: url('../images/avatar.jpg');
+    /* 替换为头像图片的路径 */
+    background-size: cover;
+    background-position: center;
+}
+
+/* 用户名和邮箱 */
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.email {
+    font-size: 14px;
+    color: #cccccc;
+    /* 使邮箱颜色比用户名颜色浅 */
+}
+
+.sidebar {
+    width: 30%;
+    background-color: #2a2a2a;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar h2 {
+    color: #6ab0ff;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.sidebar .search {
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar .search input {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #fff;
+    padding-left: 10px;
+    outline: none;
+}
+
+.sidebar .menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.menu-item {
+    background-color: #333;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
+    min-width: 70px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.menu-item span {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 5px;
+    color: #aaa;
+}
+
+/* Task List */
+.task-list {
+    background-color: #333;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.task-list h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Right Content */
+.content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.content h2 {
+    color: #6ab0ff;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.time-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 20px;
+    color: #aaa;
+    font-size: 18px;
+}
+
+.time-section .task {
+    width: 100%;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+.time-section div.divider {
+    width: 1200px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+.time-section div.category-container {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.time-section strong {
+    color: #6ab0ff;
+    font-size: 20px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    display: block;
+}
+
+.time-section p {
+    position: relative;
+    margin: 0;
+    padding-left: 40px;
+    /* 留出空间给左侧的圆点 */
+    color: #ccc;
+    font-size: 16px;
+}
+
+/* 圆点标志样式 */
+.time-section p:before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 5px;
+    margin-left: 15px;
+    /* 垂直居中 */
+}
+
+/* 已完成任务的蓝色实心圆 */
+.time-section p.completed:before {
+    background-color: #6ab0ff;
+}
+
+.time-section p.completed {
+    text-decoration: line-through;
+}
+
+/* 未完成任务的空心圆 */
+.time-section p.pending:before {
+    border: 2px solid #6ab0ff;
+    background-color: transparent;
+}
+
+
+.no-reminders {
+    font-size: 18px;
+    color: #555;
+    margin-top: 100px;
+    text-align: center;
+}
+
+.add-task-btn {
+    color: #6ab0ff;
+    font-size: 18px;
+    margin-top: auto;
+    text-align: center;
+}
