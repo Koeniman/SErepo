@@ -1,4 +1,4 @@
-// 主函数：加载并分类显示任务
+// 主函数：加载并分类显示任务，并启用点击监听
 function loadTasks(date) {
     const fileName = `../tasks/${date}.json`; // JSON 文件路径
     fetch(fileName)
@@ -11,6 +11,7 @@ function loadTasks(date) {
         .then(data => {
             const groupedTasks = categorizeTasks(data.tasks); // 分类并排序任务
             renderTasks(groupedTasks); // 渲染任务
+            addClickListeners(); // 在任务渲染后添加点击监听器
         })
         .catch(error => {
             console.error("加载任务时出错：", error);
@@ -86,6 +87,30 @@ function renderTasks(groupedTasks) {
 
             // 将分类容器添加到任务列表
             timeSection.appendChild(categoryContainer);
+        }
+    });
+}
+
+// 点击监听器函数
+function addClickListeners() {
+    const timeSection = document.querySelector('.time-section'); // 任务容器
+
+    // 检查是否有任务元素
+    if (!timeSection) {
+        console.error('任务容器未找到。');
+        return;
+    }
+
+    // 为动态生成的任务条目绑定点击事件
+    timeSection.addEventListener('click', (event) => {
+        const clickedElement = event.target;
+
+        // 确保点击的是任务条目
+        if (clickedElement.tagName.toLowerCase() === 'p' && clickedElement.className) {
+            alert(`你点击了任务: ${clickedElement.textContent}`);
+
+            // 后续操作可以在这里实现，例如导航到任务详情页或编辑页面
+            // console.log(clickedElement.dataset); // 如果需要使用自定义数据属性
         }
     });
 }
