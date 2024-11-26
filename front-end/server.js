@@ -101,6 +101,7 @@ app.patch('/tasks/:date/:taskId', (req, res) => {
     const filePath = path.join(__dirname, 'tasks', `${date}.json`); // 文件路径
     fs.readFile(filePath, 'utf8', (readErr, fileContent) => {
         if (readErr && readErr.code === 'ENOENT') {
+            alert("task not found");
             return res.status(404).json({ error: 'Tasks file not found' });
         } else if (readErr) {
             console.error('Error reading file:', readErr);

@@ -1,8 +1,10 @@
 let nrtasks = 0; // 全局变量，用于记录任务数量
-
+const today = "2024-11-22";
+loadTasks(today);
+alert("init");
 // 主函数：加载并分类显示任务，并启用点击监听
 function loadTasks(date) {
-    const fileName = `../tasks/${date}.json`; // JSON 文件路径
+    const fileName = `http://localhost:3000/tasks/${date}`; // JSON 文件路径
     fetch(fileName)
         .then(response => {
             if (!response.ok) {
@@ -79,6 +81,7 @@ function renderTasks(groupedTasks) {
             tasks.forEach(task => {
                 const taskElement = document.createElement('p');
                 taskElement.className = task.status; // 根据任务的 status 设置 class
+                taskElement.dataset.taskId = task.id; // 给每个任务元素加上 data-task-id 属性
                 taskElement.innerHTML = `${task.time} ${task.title}`;
                 categoryContainer.appendChild(taskElement);
             });
@@ -110,11 +113,39 @@ function addClickListeners() {
 
         // 确保点击的是任务条目
         if (clickedElement.tagName.toLowerCase() === 'p' && clickedElement.className) {
-            alert(`你点击了任务: ${clickedElement.textContent}`);
+            const taskId = clickedElement.dataset.taskId; // 获取任务的 ID
+            const newStatus = clickedElement.className === 'pending' ? 'completed' : 'pending'; // 反转状态
+
+            // 更新任务状态
+            updateTaskStatus(taskId, newStatus);
         }
-    });
+    },{once : true});
+    // 使用过后即消除，防止监听器呈指数增长
 }
 
-// 示例：加载 2024-11-22 的任务
-const today = "2024-11-22";
-loadTasks(today);
+// 更新任务状态函数
+function updateTaskStatus(taskId, newStatus) {
+    const today = "2024-11-22"; // 使用当前日期
+    fetch(`http://localhost:3000/tasks/${today}/${taskId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ status: newStatus })
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to update task status');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Task status updated:', data);
+            loadTasks(today); // 重新加载任务列表
+        })
+        .catch(error => {
+            console.error('Error updating task status:', error);
+        });
+}
+
+

@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 为新任务分配 ID，ID 递增
         const task = {
-            id: nrtasks + 1, // 分配新的 ID
+            id: (nrtasks + 1).toString(), // 分配新的 ID
             time: `${hourInput.padStart(2, '0')}:${minuteInput.padStart(2, '0')}`,
             title: titleInput,
             status: 'pending'
