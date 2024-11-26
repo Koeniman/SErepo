@@ -33,8 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // 为新任务分配 ID，ID 递增
         const task = {
-            id: 4,
+            id: nrtasks + 1, // 分配新的 ID
             time: `${hourInput.padStart(2, '0')}:${minuteInput.padStart(2, '0')}`,
             title: titleInput,
             status: 'pending'
@@ -54,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return response.json();
             })
             .then(() => {
-                //alert('任务添加成功！');
                 modal.classList.add('hidden');
                 loadTasks(today); // 重新渲染任务列表
             })
