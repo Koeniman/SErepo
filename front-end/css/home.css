@@ -173,20 +173,20 @@ body {
 
 .time-section div.category-container {
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 .time-section strong {
     color: #6ab0ff;
     font-size: 20px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     margin-left: 15px;
     display: block;
 }
 
 .time-section p {
     position: relative;
-    margin: 0;
+    margin-bottom: 10px;
     padding-left: 40px;
     /* 留出空间给左侧的圆点 */
     color: #ccc;
