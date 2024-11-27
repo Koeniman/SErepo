@@ -64,11 +64,20 @@ app.post('/tasks/:date', (req, res) => {
     });
 });
 
+// 确保目标任务文件存在，不存在时创建
+function ensureTaskFileExists(date) {
+    const filePath = path.join(__dirname, 'tasks', `${date}.json`);
+    if (!fs.existsSync(filePath)) {
+        // 文件不存在时，创建并初始化为空数组
+        fs.writeFileSync(filePath, JSON.stringify({date:`${date}` ,tasks: [] }, null, 2));
+    }
+}
+
 // 路由：获取当天任务列表
 app.get('/tasks/:date', (req, res) => {
     const { date } = req.params; // 获取日期参数
     const filePath = path.join(__dirname, 'tasks', `${date}.json`); // 文件路径
-
+    ensureTaskFileExists(date);
     // 读取文件
     fs.readFile(filePath, 'utf8', (err, fileContent) => {
         if (err && err.code === 'ENOENT') {
