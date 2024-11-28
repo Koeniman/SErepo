@@ -1,7 +1,8 @@
 let nrtasks = 0; // 全局变量，用于记录任务数量
 const today = "2024-11-22";
+traverseTasks(today);
 loadTasks(today);
-alert("init");
+alert("Initializing Tasks");
 // 主函数：加载并分类显示任务，并启用点击监听
 function loadTasks(date) {
     const fileName = `http://localhost:3000/tasks/${date}`; // JSON 文件路径
@@ -114,7 +115,7 @@ function addClickListeners() {
         // 确保点击的是任务条目
         if (clickedElement.tagName.toLowerCase() === 'p' && clickedElement.className) {
             const taskId = clickedElement.dataset.taskId; // 获取任务的 ID
-            const newStatus = clickedElement.className === 'pending' ? 'completed' : 'pending'; // 反转状态
+            const newStatus = clickedElement.className === 'completed'? 'pending' : 'completed'; // 反转状态
 
             // 更新任务状态
             updateTaskStatus(taskId, newStatus);
@@ -148,4 +149,38 @@ function updateTaskStatus(taskId, newStatus) {
         });
 }
 
+function traverseTasks(date) {
+    const fileName = `http://localhost:3000/tasks/${date}`; // JSON 文件路径
+    fetch(fileName)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`文件 ${fileName} 不存在或加载失败`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const groupedTasks = data.tasks;
 
+            // 获取当前时间，设置为当前日期的当前时刻
+            const currentTime = new Date();
+            const currentHour = 15;
+            const currentMinute = 30;
+            const currentDateTime = currentHour * 60 + currentMinute; // 转换为分钟表示
+
+            // 遍历任务并检查是否逾期
+            groupedTasks.forEach(task => {
+                const taskTime = task.time; // 任务的时间（格式：HH:MM）
+                const [taskHour, taskMinute] = taskTime.split(':').map(Number);
+                const taskDateTime = taskHour * 60 + taskMinute; // 转换为分钟表示
+
+                // 如果任务时间小于当前时间，且任务状态不是 "逾期"
+                if (taskDateTime < currentDateTime && task.status === 'pending') {
+                    updateTaskStatus(task.id, 'overdue'); // 更新任务状态为逾期
+                }
+            });
+        })
+        .catch(error => {
+            console.error("加载任务时出错：", error);
+            alert("无法加载任务，请检查文件路径或文件名是否正确。");
+        });
+}

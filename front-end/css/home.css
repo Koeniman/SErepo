@@ -208,6 +208,7 @@ body {
 
 /* 已完成任务的蓝色实心圆 */
 .time-section p.completed:before {
+    border: 2px solid #6ab0ff;
     background-color: #6ab0ff;
 }
 
@@ -221,6 +222,10 @@ body {
     background-color: transparent;
 }
 
+.time-section p.overdue:before {
+    border: 2px solid #fc3535;
+    background-color: #fc3535;
+}
 
 .no-reminders {
     font-size: 18px;
