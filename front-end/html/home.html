@@ -29,22 +29,23 @@
 
         <div class="menu">
             <div class="menu-item">
-                <span>1</span>
+                <span id="task-count">1</span>
                 今天
             </div>
             <div class="menu-item">
-                <span>1</span>
+                <span id="pending-count">1</span>
                 计划
             </div>
             <div class="menu-item">
-                <span>1</span>
+                <span id="task-total">1</span>
                 全部
             </div>
             <div class="menu-item">
-                <span>0</span>
+                <span id="star-count">0</span>
                 星标
             </div>
             <div class="menu-item">
+                <span id="comp-count">0</span>
                 <span>完成</span>
             </div>
         </div>
@@ -86,19 +87,23 @@
                 <h3>添加新提醒事项</h3>
                 <label for="task-title">名称：</label>
                 <input type="text" id="task-title" placeholder="输入任务名称">
-
+                <label for="task-class">类别：</label>
+                <div class="class-inputs">
+                    <select id="task-class">
+                        <option value="default">默认</option>
+                        <option value="star">星标</option>
+                    </select>
+                </div>
                 <label for="task-hour">截止时间：</label>
                 <label for="task-minute"></label>
+
                 <div class="time-inputs">
                     <select id="task-hour">
                         <!-- 小时选项 -->
                         <option value="" disabled selected>请选择小时</option>
                     </select>
                     <script>
-                        // 动态生成小时选项
-                        const taskHourSelect = document.getElementById('task-hour');
-                        taskHourSelect.innerHTML += [...Array(24).keys()].map(hour => `
-            <option value="${hour}">${hour.toString().padStart(2, '0')}</option>`).join('');
+
                     </script>
                     :
                     <select id="task-minute">
@@ -106,9 +111,7 @@
                         <option value="" disabled selected>请选择分钟</option>
                     </select>
                     <script>
-                        const taskMinuteSelect = document.getElementById('task-minute');
-                        taskMinuteSelect.innerHTML += [...Array(60).keys()].map(minute => `
-            <option value="${minute}">${minute.toString().padStart(2, '0')}</option>`).join('');
+
                     </script>
                 </div>
 
@@ -123,7 +126,7 @@
 </div>
 <script src="../js/LoadList.js"></script>
 <script src="../js/ListActions.js"></script>
-
+<script src="../js/DataDisplay.js"></script>
 </body>
 
 </html>

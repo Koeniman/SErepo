@@ -222,6 +222,12 @@ body {
     background-color: transparent;
 }
 
+/* 未完成任务的空心圆 */
+.time-section p.star:before {
+    border: 2px solid #faff6a;
+    background-color: transparent;
+}
+
 .time-section p.overdue:before {
     border: 2px solid #fc3535;
     background-color: #fc3535;

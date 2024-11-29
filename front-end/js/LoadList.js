@@ -1,5 +1,5 @@
-let nrtasks = 0; // 全局变量，用于记录任务数量
-const today = "2024-11-22";
+let taskCount = 0; // 全局变量，用于记录任务数量
+let today = "2024-11-22";
 
 
 // 主函数：加载并分类显示任务，并启用点击监听
@@ -28,7 +28,7 @@ function loadTasks(date) {
         })
         .then(data => {
             addClickListeners(); // 在任务渲染后添加点击监听器
-            nrtasks = data.tasks.length; // 更新全局任务数量
+            taskCount = data.tasks.length; // 更新全局任务数量
         })
         .catch(error => {
             console.error("加载任务时出错：", error);
@@ -170,6 +170,7 @@ async function updateTaskStatus(taskId, newStatus) {
         })
         .then(data => {
             console.log('Task status updated:', data);
+            countNr(today);
         })
         .catch(error => {
             console.error('Error updating task status:', error);
