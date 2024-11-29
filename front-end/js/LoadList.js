@@ -163,8 +163,8 @@ function traverseTasks(date) {
 
             // 获取当前时间，设置为当前日期的当前时刻
             const currentTime = new Date();
-            const currentHour = 15;
-            const currentMinute = 30;
+            const currentHour = currentTime.getHours();
+            const currentMinute = currentTime.getMinutes();
             const currentDateTime = currentHour * 60 + currentMinute; // 转换为分钟表示
 
             // 遍历任务并检查是否逾期
