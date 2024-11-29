@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(() => {
                 modal.classList.add('hidden');
-                loadTasks(today); // 重新渲染任务列表
+                renderTasks(today); // 重新渲染任务列表
             })
             .catch(error => console.error('Error adding task:', error));
     });
